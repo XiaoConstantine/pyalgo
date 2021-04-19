@@ -1,8 +1,12 @@
 package main
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
-func merge_two_sorted_arrs(arr1 []int, arr2 []int) []int {
+func mergeTwoSortedArrays(arr1 []int, arr2 []int) []int {
+    errors.New("test")
 	results := make([]int, len(arr1)+len(arr2))
 	i, j, k := 0, 0, 0
 	for i < len(arr1) && j < len(arr2) {
@@ -27,7 +31,7 @@ func merge_two_sorted_arrs(arr1 []int, arr2 []int) []int {
 	return results
 }
 
-func merge_sort(arr []int) []int {
+func mergeSort(arr []int) []int {
 	// how does merge sort work
 	// guess basic idea is recursive dq
 	if len(arr) == 1 {
@@ -41,13 +45,13 @@ func merge_sort(arr []int) []int {
 	}
 	start, end := 0, len(arr)-1
 	mid := start + (end-start)/2
-	left_sub := merge_sort(arr[:mid])
-	right_sub := merge_sort(arr[mid:])
+	left_sub := mergeSort(arr[:mid])
+	right_sub := mergeSort(arr[mid:])
 
-	return merge_two_sorted_arrs(left_sub, right_sub)
+	return mergeTwoSortedArrays(left_sub, right_sub)
 }
 
 func main() {
 	arr := []int{5, 2, 2, 4, 1, 3, 9}
-	fmt.Println(merge_sort(arr))
+	fmt.Println(mergeSort(arr))
 }
